@@ -27,7 +27,7 @@ async function login() {
     click(loginBtn);
     await page.waitFor('input[name=username]');
     await page.focus('input[name=username]');
-    await page.keyboard.type(rmail);
+    await page.keyboard.type(email);
     await page.focus('#loginPassword');
     await page.keyboard.type(pass);
     const [loginConfirm] = await page.$x('//*[@id="container"]/div/div[2]/div/div[2]/div/form/section/input');
@@ -38,9 +38,7 @@ async function login() {
 
     while (1) {
         const date = await page.$('.date');
-        if (page.evaluate(el => el.textContent, date)) {
-            const dateTxt = await page.evaluate(el => el.textContent, date);
-        }
+        const dateTxt = await page.evaluate(el => el.textContent, date);
         console.log(dateTxt);
         await page.reload({ waitUntil: ['networkidle0', 'domcontentloaded'] });
     }
